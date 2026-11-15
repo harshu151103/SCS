@@ -323,8 +323,9 @@ def main():
     if not queue:
         log.info("Nothing to review.")
         return
-    Reviewer(queue, items, store)
+    reviewer = Reviewer(queue, items, store)  # must keep a reference: mpl callbacks are weak refs
     plt.show()
+    del reviewer
     log.info("Finished. Decisions: %s", out / "all_decisions.csv")
 
 
